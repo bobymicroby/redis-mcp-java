@@ -1,0 +1,41 @@
+[versions]
+project = "0.0.1-SNAPSHOT"
+java = "23"
+spring-boot = "3.4.5"
+spring-dependency-management = "1.1.7"
+spring-ai = "1.1.0-SNAPSHOT"
+junit-bom = "5.10.1"
+lettuce-core = "6.7.1.RELEASE"
+mcp-sdk = "0.10.0"
+jackson = "2.18.2"
+caffeine = "3.2.1"
+reflections = "0.10.2"
+mcp-spring-webflux= "0.10.0"
+jsonschema-generator= "4.38.0"
+jedis = "6.0.0"
+
+
+[libraries]
+spring-ai-starter-mcp-server-webflux = { module = "org.springframework.ai:spring-ai-starter-mcp-server-webflux" }
+spring-ai-bom = { module = "org.springframework.ai:spring-ai-bom", version.ref = "spring-ai" }
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+junit-bom = { module = "org.junit:junit-bom", version.ref = "junit-bom" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+lettuce-core = { module = "io.lettuce:lettuce-core", version.ref = "lettuce-core" }
+caffeine = { module = "com.github.ben-manes.caffeine:caffeine", version.ref = "caffeine" }
+mcp-sdk = { module = "io.modelcontextprotocol.sdk:mcp", version.ref = "mcp-sdk" }
+jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations", version.ref = "jackson" }
+jackson-core = { module = "com.fasterxml.jackson.core:jackson-core", version.ref = "jackson" }
+jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
+mcp-spring-webflux = { module = "io.modelcontextprotocol.sdk:mcp-spring-webflux", version.ref = "mcp-spring-webflux" }
+reflections = { module = "org.reflections:reflections", version.ref = "reflections" }
+jsonschema-generator = { module = "com.github.victools:jsonschema-generator", version.ref = "jsonschema-generator" }
+jedis = { module = "redis.clients:jedis", version.ref = "jedis" }
+[plugins]
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }
+
+[bundles]
+junit = ["junit-jupiter", "junit-platform-launcher"]
+jackson = ["jackson-core", "jackson-databind", "jackson-annotations"]

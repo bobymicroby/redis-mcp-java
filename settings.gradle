@@ -1,0 +1,4 @@
+rootProject.name = 'redis-mcp-java'
+
+include 'core'
+include 'spring'

@@ -1,0 +1,35 @@
+# OS X
+.DS_Store
+
+# eclipse
+.project
+.classpath
+.settings
+
+# intellij
+*.iml
+*.ipr
+*.iws
+.idea/
+.run/
+
+# editors
+*.sublime-project
+*.sublime-workspace
+*~
+
+# the build
+build-local.properties
+.gradle/
+build*
+!buildSrc/
+cmake-build-debug/
+cmake-build-release/
+cmake-build-debug-*/
+cmake-build-release-*/
+
+
+# JVM crash reports
+hs_err_pid*
+*.hprof
+
