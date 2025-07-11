@@ -1,12 +1,20 @@
 > ⚠️ **Beta Software**: This project is under active development. Expect bugs and breaking changes.
 
+
+> For the official Redis MCP server, please visit [redis-mcp](https://github.com/redis/mcp-redis)
+> This project is intended to be used as library to develop custom MCP tools for Redis ( e.g. in-house Redis modules,
+> custom Lua scripts or Redis Functions )
+> The existing tools are provided as examples and can be used as a reference for developing your own tools.
+
 # Redis MCP Java
 
-A Java implementation of Model Context Protocol (MCP) tools for Redis operations, providing both Lettuce and Jedis client support with automatic tool discovery and schema generation.
+A Java implementation of Model Context Protocol (MCP) tools for Redis operations, providing both Lettuce and Jedis
+client support with automatic tool discovery and schema generation.
 
 ## Architecture Overview
 
-The Redis MCP Java library follows a layered architecture that separates concerns between connection management,validation, MCP tool handling, and MCP protocol integration.
+The Redis MCP Java library follows a layered architecture that separates concerns between connection
+management,validation, MCP tool handling, and MCP protocol integration.
 
 ### Core Components
 
@@ -32,15 +40,16 @@ Each Redis command is implemented as a separate handler class that extends eithe
 ```java
 public class GetHandler extends LettuceHandler {
     public record GetRequest(
-        @Nonnull @Description("The Redis key to retrieve") String key
-    ) {}
+            @Nonnull @Description("The Redis key to retrieve") String key
+    ) {
+    }
 
     @Override
     public McpSchema.Tool toolSchema() {
         return new McpSchema.Tool(
-            "redis_get",
-            "Retrieve a value from Redis by key",
-            recordToJSONSchema(GetRequest.class)
+                "redis_get",
+                "Retrieve a value from Redis by key",
+                recordToJSONSchema(GetRequest.class)
         );
     }
 
@@ -82,7 +91,6 @@ Type-safe user input validation
 - **Type Safety**: Compile-time validation of parameter types
 - **Error Accumulation**: Collect multiple validation errors
 
-
 ## How to Add New MCP Tools
 
 Adding new Redis tools involves creating handler classes that integrate automatically with the MCP framework.
@@ -108,16 +116,17 @@ Create a Java record with validation annotations:
 
 ```java
 public record MyRequest(
-    @Nonnull
-    @Description("The Redis key to operate on")
-    String key,
+        @Nonnull
+        @Description("The Redis key to operate on")
+        String key,
 
-    @Description("Optional timeout in seconds")
-    Long timeout,
+        @Description("Optional timeout in seconds")
+        Long timeout,
 
-    @Description("Operation mode")
-    String mode
-) {}
+        @Description("Operation mode")
+        String mode
+) {
+}
 ```
 
 ### Step 3: Implement Tool Schema
@@ -125,12 +134,13 @@ public record MyRequest(
 Define the MCP tool specification:
 
 ```java
+
 @Override
 public McpSchema.Tool toolSchema() {
     return new McpSchema.Tool(
-        "redis_my_command",                    // Tool name (must be unique)
-        "Description of what this tool does",  // Tool description
-        recordToJSONSchema(MyRequest.class)    // Auto-generated schema
+            "redis_my_command",                    // Tool name (must be unique)
+            "Description of what this tool does",  // Tool description
+            recordToJSONSchema(MyRequest.class)    // Auto-generated schema
     );
 }
 ```
@@ -141,12 +151,12 @@ Use the validation framework to safely parse arguments:
 
 ```java
 private static Result<MyRequest, McpSchema.CallToolResult> validateRequest(
-    Map<String, Object> arguments
+        Map<String, Object> arguments
 ) {
     return Result.combine(
-        V.String(arguments, "key"),           // Required string
-        V.OptionalLong(arguments, "timeout"), // Optional long
-        V.OptionalString(arguments, "mode")   // Optional string
+            V.String(arguments, "key"),           // Required string
+            V.OptionalLong(arguments, "timeout"), // Optional long
+            V.OptionalString(arguments, "mode")   // Optional string
     ).with(MyRequest::new);
 }
 ```
@@ -154,10 +164,11 @@ private static Result<MyRequest, McpSchema.CallToolResult> validateRequest(
 ### Step 5: Implement Sync Handler
 
 ```java
+
 @Override
 public McpSchema.CallToolResult handleSync(
-    McpSyncServerExchange exchange,
-    Map<String, Object> arguments
+        McpSyncServerExchange exchange,
+        Map<String, Object> arguments
 ) {
     var result = validateRequest(arguments);
 
@@ -174,19 +185,20 @@ public McpSchema.CallToolResult handleSync(
 
 
     return McpSchema.CallToolResult.builder()
-        .addTextContent("Result: " + value)
-        .isError(false)
-        .build();
+            .addTextContent("Result: " + value)
+            .isError(false)
+            .build();
 }
 ```
 
 ### Step 6: Implement Async Handler
 
 ```java
+
 @Override
 public CompletableFuture<McpSchema.CallToolResult> handleAsync(
-    McpAsyncServerExchange exchange,
-    Map<String, Object> arguments
+        McpAsyncServerExchange exchange,
+        Map<String, Object> arguments
 ) {
     var result = validateRequest(arguments);
 
@@ -197,15 +209,15 @@ public CompletableFuture<McpSchema.CallToolResult> handleAsync(
     var request = result.unwrap();
 
     return getConnectionAsync()
-        .thenCompose(conn -> conn.async().myCommand(request.key))
-        .thenApply(value -> McpSchema.CallToolResult.builder()
-            .addTextContent("Result: " + value)
-            .isError(false)
-            .build());
+            .thenCompose(conn -> conn.async().myCommand(request.key))
+            .thenApply(value -> McpSchema.CallToolResult.builder()
+                    .addTextContent("Result: " + value)
+                    .isError(false)
+                    .build());
 
 
-    });
-}
+});
+        }
 ```
 
 ### Step 7: Package Placement
@@ -225,13 +237,12 @@ RedisToolsRepository.getSyncToolSpecifications(String redisUrl, int maxConnectio
 
 #### Custom Handler Development
 
-If you are developing your own handler in a custom package, pass the package name to the `RedisToolsRepository` for manual instantiation:
+If you are developing your own handler in a custom package, pass the package name to the `RedisToolsRepository` for
+manual instantiation:
 
 ```java
 RedisToolsRepository.getSyncToolSpecifications(String redisUrl, int maxConnections, List<String> packages)
 ```
-
-
 
 ## Usage
 
@@ -240,34 +251,40 @@ RedisToolsRepository.getSyncToolSpecifications(String redisUrl, int maxConnectio
 ```java
 // Create tool specifications
 var toolSpecs = RedisToolsRepository.getSyncToolSpecifications(
-    "redis://localhost:6379",
-    10  // max connections
-);
+                "redis://localhost:6379",
+                10  // max connections
+        );
 
 // Register with the Java MCP server
-mcpServer.registerTools(toolSpecs);
+mcpServer.
+
+registerTools(toolSpecs);
 ```
 
 ### Custom Package Scanning
 
 ```java
 var customPackages = List.of(
-    "com.mycompany.redis.handlers",
-    "io.redis.mcp.java.core.handlers.lettuce"
+        "com.mycompany.redis.handlers",
+        "io.redis.mcp.java.core.handlers.lettuce"
 );
 
 var toolSpecs = RedisToolsRepository.getSyncToolSpecifications(
-    "redis://localhost:6379",
-    10,
-    customPackages
+        "redis://localhost:6379",
+        10,
+        customPackages
 );
 ```
 
 ## Spring Boot MCP Server
 
-The project includes a ready-to-run Spring Boot application that provides a complete MCP server with Redis tool integration.
+The project includes a ready-to-run Spring Boot application that provides a complete MCP server with Redis tool
+integration.
 
-> **Future Development**: We are planning to develop Spring-specific annotations, annotation processors, and auto-configuration starters to streamline the integration of redis-mcp-java with Spring MCP in a future release. This will provide declarative configuration and automatic setup. For now, manual MCP server configuration is required, but the current approach is straightforward and provides full control over the setup.
+> **Future Development**: We are planning to develop Spring-specific annotations, annotation processors, and
+> auto-configuration starters to streamline the integration of redis-mcp-java with Spring MCP in a future release. This
+> will provide declarative configuration and automatic setup. For now, manual MCP server configuration is required, but
+> the current approach is straightforward and provides full control over the setup.
 
 ### Configuration
 
