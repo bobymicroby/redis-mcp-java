@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  * - Creating MCP tool specifications for server registration
  * - Supporting both sync and async execution patterns
  *
- * @author Borislav Ivanov
+ * 
  * @see HandlerScanner
  * @see LettuceHandler
  * @see Redis.WithLazyConnectionPool

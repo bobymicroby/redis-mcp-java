@@ -5,7 +5,7 @@ import io.redis.mcp.java.core.validation.Result;
 import java.util.function.BiFunction;
 
 /**
- * @author Borislav Ivanov
+ * 
  */
 public class Combine2<A, B, TError> {
 

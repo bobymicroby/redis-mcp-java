@@ -25,7 +25,7 @@ import java.util.*;
  * added by simply creating new handler classes in the scanned package.
  * </p>
  *
- * @author Borislav Ivanov
+ * 
 
  * @see LettuceHandler
  * @see RedisToolsRepository

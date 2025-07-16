@@ -4,7 +4,7 @@ import io.redis.mcp.java.core.validation.Result;
 import java.util.function.Function;
 
 /**
- * @author Borislav Ivanov
+ * 
  */
 public class Combine1<A, TError> {
 

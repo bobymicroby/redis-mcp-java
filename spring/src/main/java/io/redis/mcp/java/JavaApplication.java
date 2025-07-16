@@ -21,7 +21,7 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import java.util.List;
 
 /**
- * @author Borislav Ivanov
+ * 
  */
 @SpringBootApplication
 @EnableConfigurationProperties(RedisProperties.class)

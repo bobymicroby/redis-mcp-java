@@ -20,7 +20,7 @@ import static java.util.concurrent.CompletableFuture.completedFuture;
  * Handler for Redis SET operations in the Model Context Protocol (MCP) server.
  *
  * 
- * @author Borislav Ivanov
+ * 
  */
 public class SetHandler extends LettuceHandler {
 

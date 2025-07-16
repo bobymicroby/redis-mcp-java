@@ -18,7 +18,7 @@ import java.util.concurrent.CompletableFuture;
  * both blocking and non-blocking usage patterns in the MCP server.
  * </p>
  *
- * @author Borislav Ivanov
+ * 
  */
 public interface Redis {
 

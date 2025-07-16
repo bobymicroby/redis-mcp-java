@@ -36,7 +36,7 @@ import java.util.concurrent.CompletableFuture;
  *   <li>When cache reaches maximum size, least-recently-used connections are evicted and closed</li>
  * </ol>
  *
- * @author Borislav Ivanov
+ * 
  * @see ConnectionHandle
  */
 public class JedisConnectionCache {

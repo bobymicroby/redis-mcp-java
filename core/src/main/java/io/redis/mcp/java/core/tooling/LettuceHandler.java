@@ -39,7 +39,7 @@ import static com.github.victools.jsonschema.generator.SchemaVersion.DRAFT_2020_
  * - Support for both blocking and non-blocking operations
  * </p>
  *
- * @author Borislav Ivanov
+ * 
  */
 public abstract class LettuceHandler implements RedisHandler {
 

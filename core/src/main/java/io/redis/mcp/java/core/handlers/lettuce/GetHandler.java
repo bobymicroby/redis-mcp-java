@@ -16,7 +16,7 @@ import java.util.concurrent.CompletableFuture;
 /**
  * Handler for Redis GET operations in the Model Context Protocol (MCP) server.
  *
- * @author Borislav Ivanov
+ * 
  */
 public class GetHandler extends LettuceHandler {
 

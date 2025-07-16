@@ -333,6 +333,3 @@ Once running, the MCP server provides:
 - **Server-Sent Events Endpoint**: `http://localhost:8080/mcp/message`
 - **Available Tools**: Automatically discovered Redis handlers (GET, SET, JSON.GET, JSON.SET)
 
-## Author
-
-Borislav Ivanov

@@ -4,7 +4,7 @@ import io.redis.mcp.java.core.validation.f.F9;
 import io.redis.mcp.java.core.validation.Result;
 
 /**
- * @author Borislav Ivanov
+ * 
  */
 public class Combine9<A, B, C, D, E, F, G, H, I, TError> {
 

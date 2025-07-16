@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
  * Round-robin connection pool for Redis connections.
  * Manages a fixed set of connection IDs and distributes them in round-robin fashion.
  *
- * @author Borislav Ivanov
+ * 
  */
 public class RoundRobinRedisConnectionPool<T> {
 

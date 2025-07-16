@@ -15,7 +15,7 @@ import java.util.function.Function;
  *
  * @param <T>      the type of the success value
  * @param <TError> the type of the error value
- * @author Borislav Ivanov
+ * 
  */
 public sealed interface Result<T, TError> permits Result.Ok, Result.Err {
     /**

@@ -3,7 +3,7 @@ package io.redis.mcp.java.core.validation.f;
 /**
  * A function that takes eleven arguments and returns a result.
  
- * @author Borislav Ivanov
+ * 
  */
 @FunctionalInterface
 public interface F11<A, B, C, D, E, F, G, H, I, J, K, L> {

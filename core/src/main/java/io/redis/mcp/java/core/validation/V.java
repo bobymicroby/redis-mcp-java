@@ -30,7 +30,7 @@ import java.util.function.Function;
  * }
  * </pre>
  *
- * @author Borislav Ivanov
+ * 
  */
 public class V {
 

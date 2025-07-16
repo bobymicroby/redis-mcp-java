@@ -30,7 +30,7 @@ import java.lang.annotation.Target;
  * during schema generation. 
  * </p>
  *
- * @author Borislav Ivanov
+ * 
  * @see LettuceHandler#recordToJSONSchema(Class)
  */
 @Target({ElementType.FIELD, ElementType.RECORD_COMPONENT})

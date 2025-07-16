@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * Configuration properties for Redis MCP integration.
  *
- * @author Borislav Ivanov
+ * 
  */
 @ConfigurationProperties(prefix = "redis.mcp")
 public record RedisProperties(
